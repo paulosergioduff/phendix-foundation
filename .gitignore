@@ -3,6 +3,7 @@
 /public/storage
 /storage/*.key
 /vendor
+bundles/wordpress/wordpress6.2/wp-config.php
 .env
 .env.backup
 .phpunit.result.cache
