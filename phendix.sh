@@ -18,4 +18,8 @@ touch "projects/$nome_do_projeto/auto/prompt/GPT-3.5_v1/files_Prompt_1.txt" "pro
 # Cria arquivos de exemplo nas pastas doc
 touch "projects/$nome_do_projeto/doc/files_Prompt_1.doc" "projects/$nome_do_projeto/doc/files_Prompt_2.doc"
 
+# Copia o arquivo run.sh para a pasta do projeto
+cp run.sh "projects/$nome_do_projeto/run.sh"
+
 echo "Estrutura de pastas para o projeto 'projects/$nome_do_projeto' criada com sucesso!"
+echo "run.sh copied to 'projects/$nome_do_projeto' successfully!"
