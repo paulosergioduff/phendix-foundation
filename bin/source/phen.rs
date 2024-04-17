@@ -29,8 +29,8 @@ fn main() -> io::Result<()> {
     fs::File::create(project_path.join("auto/prompt/GPT-4.0_v2/files_Prompt_2.txt"))?;
 
     // Cria arquivos de exemplo nas pastas doc
-    fs::File::create(project_path.join("doc/files_Prompt_1.txt"))?;
-    fs::File::create(project_path.join("doc/files_Prompt_2.txt"))?;
+    fs::File::create(project_path.join("doc/files_Prompt_1.txt.md"))?;
+    fs::File::create(project_path.join("doc/files_Prompt_2.txt.md"))?;
 
 
     println!("Estrutura de pastas para o projeto 'projects/{}' criada com sucesso!", nome_do_projeto);
