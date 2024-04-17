@@ -1,0 +1,19 @@
+Crie um código Rust como objetivo verificar algumas regras de negócio do projeto relacionadas à documentação de um projeto. Aqui estão as regras de negócio:
+
+Fornecimento do nome do projeto: O script requer que o nome do projeto seja fornecido como argumento ao executá-lo. Caso contrário, exibe uma mensagem de erro indicando que o nome do projeto é necessário e encerra a execução com um código de saída 1.
+
+Verificação da existência da documentação: O script verifica se cada arquivo de prompt tem um equivalente na pasta de documentação do projeto. Se não encontrar um arquivo correspondente na pasta de documentação, exibe uma mensagem de erro indicando o arquivo de documentação ausente e encerra a execução com um código de saída 1.
+
+Comparação de tamanhos de arquivos: O script compara o tamanho de cada arquivo na pasta de prompt com seu respectivo arquivo na pasta de documentação. Se o tamanho do arquivo na pasta de documentação for menor que o tamanho do arquivo na pasta de prompt, exibe uma mensagem de erro indicando que o tamanho do arquivo de documentação é menor que o do arquivo de prompt correspondente e encerra a execução com um código de saída 1.
+
+Se todas essas verificações forem bem-sucedidas, o script exibirá uma mensagem indicando que todas as regras de negócio foram cumpridas com sucesso.
+
+Exemplos:
+
+./bin/run.exe NomeDoProjeto
+
+Saídas possíveis esperadas:
+
+1) Todas as regras de negócio foram executadas com sucesso!
+2) Faltando documentação em projects/NomeDoProjeto/auto/prompt/GPT-3.5_v1/exemplo.txt na pasta doc/
+3) Erro: O arquivo de documentação em projects/NomeDoProjeto/doc/exemplo.md é menor que seu correspondente em projects/NomeDoProjeto/auto/prompt/GPT-3.5_v1/exemplo.txt
