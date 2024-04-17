@@ -5,15 +5,16 @@ use std::path::{Path, PathBuf};
 fn main() {
     // Verifica se o nome do projeto e a extensão foram fornecidos como argumentos
     let args: Vec<String> = env::args().collect();
-    if args.len() < 3 {
-        eprintln!("Erro: O nome do projeto e a extensão do arquivo são necessários.");
+    if args.len() < 4 {
+        eprintln!("Erro: O nome do projeto, modelo de linguagem e a extensão do arquivo são necessários.");
         std::process::exit(1);
     }
     let project_name = &args[1];
     let extension = &args[2];
+    let model_language = &args[3];
 
     // Caminhos para as pastas de prompt e documentação
-    let prompt_folder = format!("projects/{}/auto/prompt/GPT-3.5_v1/", project_name);
+    let prompt_folder = format!("projects/{}/auto/prompt/{}/", project_name, model_language);
     let doc_folder = format!("projects/{}/doc/", project_name);
 
     // Verifica a existência da pasta de documentação
