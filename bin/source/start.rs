@@ -2,27 +2,37 @@ use std::fs;
 use std::io;
 use std::path::Path;
 
-pub fn create_project_structure(nome_do_projeto: &str) -> io::Result<()> {
-    // Cria a estrutura de pastas dentro da pasta do projeto
-    let project_path = Path::new("projects").join(nome_do_projeto);
+pub fn create_project_structure(project_name: &str) -> io::Result<()> {
+    // Create folder structure within the project directory
+    let project_path = Path::new("projects").join(project_name);
     fs::create_dir_all(project_path.join("stable"))?;
     fs::create_dir_all(project_path.join("auto/prompt/gpt3"))?;
     fs::create_dir_all(project_path.join("auto/prompt/gpt4"))?;
     fs::create_dir_all(project_path.join("doc"))?;
     fs::create_dir_all(project_path.join("framework"))?;
 
-    // Cria arquivos de exemplo nas pastas Prompt
-    fs::File::create(project_path.join("auto/prompt/gpt3/files_Prompt_1.txt"))?;
-    fs::File::create(project_path.join("auto/prompt/gpt3/files_Prompt_2.txt"))?;
-    fs::File::create(project_path.join("auto/prompt/gpt4/files_Prompt_1.txt"))?;
-    fs::File::create(project_path.join("auto/prompt/gpt4/files_Prompt_2.txt"))?;
+    // Create example files in Prompt folders
+    create_example_files(project_name, "gpt3")?;
+    create_example_files(project_name, "gpt4")?;
 
-    // Cria arquivos de exemplo nas pastas doc
-    fs::File::create(project_path.join("doc/files_Prompt_1.txt.md"))?;
-    fs::File::create(project_path.join("doc/files_Prompt_2.txt.md"))?;
+    // Create example files in doc folders
+    create_doc_files(project_name)?;
 
-    println!("Estrutura de pastas para o projeto 'projects/{}' criada com sucesso!!!", nome_do_projeto);
+    println!("Folder structure for the project 'projects/{}' created successfully!", project_name);
 
+    Ok(())
+}
 
+fn create_example_files(project_name: &str, model: &str) -> io::Result<()> {
+    let prompt_folder = format!("projects/{}/auto/prompt/{}/", project_name, model);
+    fs::File::create(prompt_folder.clone() + "files_Prompt_1.txt")?;
+    fs::File::create(prompt_folder.clone() + "files_Prompt_2.txt")?;
+    Ok(())
+}
+
+fn create_doc_files(project_name: &str) -> io::Result<()> {
+    let doc_folder = format!("projects/{}/doc/", project_name);
+    fs::File::create(doc_folder.clone() + "files_Prompt_1.txt.md")?;
+    fs::File::create(doc_folder.clone() + "files_Prompt_2.txt.md")?;
     Ok(())
 }

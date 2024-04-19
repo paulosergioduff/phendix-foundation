@@ -5,37 +5,37 @@ mod run;
 mod start;
 
 fn main() -> io::Result<()> {
-    // Verifica se foi fornecido um nome de ação como argumento
+    // Check if an action was provided as argument
     let args: Vec<String> = env::args().collect();
     if args.len() < 2 {
-        eprintln!("Erro: É necessário fornecer uma ação (run ou start) como argumento.");
+        eprintln!("Error: An action (run or start) must be provided as argument.");
         std::process::exit(1);
     }
 
-    // Ação fornecida como argumento
+    // Action provided as argument
     let action = &args[1];
 
     match action.as_str() {
         "run" => {
-            // Chama a função de run.rs com os argumentos fornecidos
+            // Call the run.rs function with the provided arguments
             run_command(&args)?;
         }
         "start" => {
-            // Chama a funcionalidade existente do phen.rs
+            // Call the existing functionality of phen.rs
             start_command(&args)?;
         }
 
         "--help" => {
-            // Chama a funcionalidade existente do phen.rs
+            // Call the existing functionality of phen.rs
             help();
         }
 
         "-v" => {
-            // Chama a funcionalidade existente do phen.rs
+            // Call the existing functionality of phen.rs
             version();
         }
         _ => {
-            eprintln!("Erro: Ação desconhecida. As ações válidas são 'run' e 'start'.");
+            eprintln!("Error: Unknown action. Valid actions are 'run' and 'start'.");
             std::process::exit(1);
         }
     }
@@ -44,7 +44,7 @@ fn main() -> io::Result<()> {
 }
 
 fn help(){
-    println!("Isso será um arquivo de ajuda!");
+    println!("This will be a help file!");
 }
 
 fn version(){
@@ -52,23 +52,22 @@ fn version(){
 }
 
 fn start_command(args: &[String]) -> io::Result<()> {
-    // Verifica se foi fornecido um nome de projeto como argumento
+    // Check if a project name was provided as argument
     if args.len() < 2 {
-        eprintln!("Erro: É necessário fornecer um nome de projeto como argumento.");
+        eprintln!("Error: A project name must be provided as argument.");
         std::process::exit(1);
     }
 
-    // Nome do projeto fornecido como argumento
-    let nome_do_projeto = &args[2];
+    // Project name provided as argument
+    let project_name = &args[2];
 
-    // Cria a estrutura de pastas e arquivos do projeto
-    start::create_project_structure(nome_do_projeto)?;
-
+    // Create the folder and file structure of the project
+    start::create_project_structure(project_name)?;
 
     Ok(())
 }
 
 fn run_command(args: &[String]) -> io::Result<()> {
-    // Chama a função de run.rs com os argumentos fornecidos
+    // Call the run.rs function with the provided arguments
     run::run_command(args)
 }
