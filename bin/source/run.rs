@@ -1,17 +1,17 @@
-use std::env;
 use std::fs;
+use std::io;
 use std::path::{Path, PathBuf};
 
-fn main() {
-    // Verifica se o nome do projeto e a extensão foram fornecidos como argumentos
-    let args: Vec<String> = env::args().collect();
-    if args.len() < 4 {
-        eprintln!("Erro: O nome do projeto, modelo de linguagem e a extensão do arquivo são necessários.");
+pub fn run_command(args: &[String]) -> io::Result<()> {
+    // Verifica se foram fornecidos todos os argumentos necessários para a ação 'run'
+    if args.len() < 5 {
+        eprintln!("Erro: O nome do projeto, modelo de linguagem e a extensão do arquivo são necessários para a ação 'run'.");
         std::process::exit(1);
     }
-    let project_name = &args[1];
-    let extension = &args[2];
-    let model_language = &args[3];
+
+    let project_name = &args[2];
+    let extension = &args[3];
+    let model_language = &args[4];
 
     // Caminhos para as pastas de prompt e documentação
     let prompt_folder = format!("projects/{}/auto/prompt/{}/", project_name, model_language);
@@ -85,4 +85,6 @@ fn main() {
 
     // Se todas as verificações passarem, exibe uma mensagem de sucesso
     println!("Todas as regras de negócio foram executadas com sucesso!");
+
+    Ok(())
 }
