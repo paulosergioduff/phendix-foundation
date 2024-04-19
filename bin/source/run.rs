@@ -5,7 +5,7 @@ use std::path::{Path, PathBuf};
 pub fn run_command(args: &[String]) -> io::Result<()> {
     // Verifica se foram fornecidos todos os argumentos necessários para a ação 'run'
     if args.len() < 5 {
-        eprintln!("Erro: O nome do projeto, modelo de linguagem e a extensão do arquivo são necessários para a ação 'run'.");
+        eprintln!("\x1b[31mErro: O nome do projeto, modelo de linguagem e a extensão do arquivo são necessários para a ação 'run'.\x1b[0m");
         std::process::exit(1);
     }
 
@@ -19,7 +19,7 @@ pub fn run_command(args: &[String]) -> io::Result<()> {
 
     // Verifica a existência da pasta de documentação
     if !Path::new(&doc_folder).exists() {
-        eprintln!("Faltando documentação na pasta {} na pasta doc/", prompt_folder);
+        eprintln!("\x1b[31mFaltando documentação na pasta {} na pasta doc/\x1b[0m", prompt_folder);
         std::process::exit(1);
     }
 
@@ -38,14 +38,14 @@ pub fn run_command(args: &[String]) -> io::Result<()> {
             })
             .collect(),
         Err(_) => {
-            eprintln!("Erro ao acessar a pasta de código.");
+            eprintln!("\x1b[31mErro ao acessar a pasta de código.\x1b[0m");
             std::process::exit(1);
         }
     };
 
     // Verifica se há arquivos na pasta de código com a extensão especificada
     if prompt_files.is_empty() {
-        eprintln!("Não foram encontrados arquivos com a extensão '{}' na pasta de código.", extension);
+        eprintln!("\x1b[31mNão foram encontrados arquivos com a extensão '{}' na pasta de código.\x1b[0m", extension);
         std::process::exit(1);
     }
 
@@ -73,18 +73,18 @@ pub fn run_command(args: &[String]) -> io::Result<()> {
 
     // Se houver arquivos sem documentação correspondente, exibe erro
     if !missing_docs.is_empty() {
-        eprintln!("Faltando documentação para os seguintes arquivos na pasta {}: {:?}", &doc_folder, missing_docs);
+        eprintln!("\x1b[31mFaltando documentação para os seguintes arquivos na pasta \x1b[0m\n{}: {:?}", &doc_folder, missing_docs);
         std::process::exit(1);
     }
 
     // Se houver arquivos de código maiores que os arquivos de documentação correspondentes, exibe erro
     if !oversized_files.is_empty() {
-        eprintln!("Os seguintes arquivos de código são maiores que seus correspondentes na pasta de documentação: {:?}", oversized_files);
+        eprintln!("\x1b[31mOs seguintes arquivos de código são maiores que seus correspondentes na pasta de documentação:\x1b[0m {:?}", oversized_files);
         std::process::exit(1);
     }
 
     // Se todas as verificações passarem, exibe uma mensagem de sucesso
-    println!("Todas as regras de negócio foram executadas com sucesso!");
+    println!("\x1b[32mTodas as regras de negócio foram executadas com sucesso!\x1b[0m");
 
     Ok(())
 }
