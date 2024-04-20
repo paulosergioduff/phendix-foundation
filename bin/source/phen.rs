@@ -1,6 +1,7 @@
 use std::env;
 use std::io;
 
+mod help;
 mod run;
 mod start;
 
@@ -27,10 +28,15 @@ fn main() -> io::Result<()> {
 
         "--help" => {
             // Call the existing functionality of phen.rs
-            help();
+            help::print_help();
         }
 
         "-v" => {
+            // Call the existing functionality of phen.rs
+            version();
+        }
+
+        "--version" => {
             // Call the existing functionality of phen.rs
             version();
         }
@@ -41,10 +47,6 @@ fn main() -> io::Result<()> {
     }
 
     Ok(())
-}
-
-fn help(){
-    println!("This will be a help file!");
 }
 
 fn version(){
