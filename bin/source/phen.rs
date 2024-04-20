@@ -31,6 +31,11 @@ fn main() -> io::Result<()> {
             help::print_help();
         }
 
+        "-h" => {
+            // Call the existing functionality of phen.rs
+            help::print_help();
+        }
+
         "-v" => {
             // Call the existing functionality of phen.rs
             version();

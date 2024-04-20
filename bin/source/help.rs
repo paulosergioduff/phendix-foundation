@@ -17,8 +17,7 @@ fn get_help_text() -> &'static str {
         Sintaxe: $phen NewApp
 
     Options:
-    --help    Show help message
-    -v               Show version
-    --version        Show version (the same command)
+    -h or --help    Show help message
+    -v or --version    Show version
     "
 }
